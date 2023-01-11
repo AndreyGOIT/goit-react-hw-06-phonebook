@@ -1,4 +1,3 @@
-// import { Component } from 'react';
 import { ContactsList } from './ContactsList/ContactsList';
 import Form from './Form/Form';
 import Filter from './Filter/Filter';
@@ -31,7 +30,7 @@ export default function App() {
 
   const changeFilter = e => {
     setFilter(e.target.value);
-    console.log(filter);
+    // console.log(filter);
   };
   const updateContacts = () => {
     const filterWord = filter.toLowerCase().trim();

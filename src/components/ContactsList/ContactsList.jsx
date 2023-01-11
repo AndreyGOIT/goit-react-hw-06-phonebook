@@ -1,15 +1,28 @@
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './ContactsList.module.css';
 import PropTypes from 'prop-types';
+import { getContacts } from 'redux/contacts/contacts-selectors';
+import { deleteContact } from 'redux/contacts/contactsSlice';
 
-export const ContactsList = ({ contacts, deleteContact }) => {
+export const ContactsList = () => {
+  const contacts = useSelector(getContacts);
+  console.log(contacts);
+  const dispatch = useDispatch();
+
   return (
     <section className={styles.section}>
       <ul>
-        {contacts.map(contact => {
+        {contacts.map(({ id, name, number }) => {
           return (
-            <li key={contact.id}>
-              {contact.name}: {contact.number}{' '}
-              <button onClick={() => deleteContact(contact.id)}>Delete</button>
+            <li key={id}>
+              {name}: {number}{' '}
+              <button
+                onClick={() => {
+                  dispatch(deleteContact(id));
+                }}
+              >
+                Delete
+              </button>
             </li>
           );
         })}
