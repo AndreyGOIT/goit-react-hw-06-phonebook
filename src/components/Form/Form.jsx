@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getContacts } from 'redux/contacts/contacts-selectors';
+
 import styles from './Form.module.css';
 import { nanoid } from 'nanoid';
 // import { within } from '@testing-library/react';
@@ -6,32 +8,24 @@ import { nanoid } from 'nanoid';
 const nameInputId = nanoid(); //=> "V1StGXR8_Z5jdHi6B-myT"
 const numberInputId = nanoid();
 
-export default function Form({ onSubmit }) {
-  const [name, setName] = useState(
-    JSON.parse(window.localStorage.getItem('name')) ?? ''
-  );
-  const [number, setNumber] = useState(
-    JSON.parse(window.localStorage.getItem('number')) ?? ''
-  );
+export default function Form() {
+  const contacts = useSelector(getContacts);
+  console.log(contacts);
+  const dispatch = useDispatch();
+
   const handleNameChange = event => {
-    setName(event.target.value);
+    name: event.target.value;
   };
   const handleNumberChange = event => {
-    setNumber(event.target.value);
+    number: event.target.value;
   };
-  useEffect(() => {
-    window.localStorage.setItem('name', JSON.stringify(name));
-  }, [name]);
-  useEffect(() => {
-    window.localStorage.setItem('number', JSON.stringify(number));
-  }, [number]);
 
   const handleSubmit = event => {
     event.preventDefault();
     console.log(name, number);
-    onSubmit({ name, number });
-    setName('');
-    setNumber('');
+    dispatch.addContact({ name, number });
+    // setName('');
+    // setNumber('');
   };
 
   return (

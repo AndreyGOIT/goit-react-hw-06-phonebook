@@ -3,7 +3,6 @@ import Form from './Form/Form';
 import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 
-import { useEffect } from 'react';
 import { useState } from 'react';
 
 export default function App() {
@@ -11,10 +10,6 @@ export default function App() {
     JSON.parse(window.localStorage.getItem('contacts')) ?? []
   );
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
 
   const formSubmitHandler = ({ name, number }) => {
     console.log(name, number);
