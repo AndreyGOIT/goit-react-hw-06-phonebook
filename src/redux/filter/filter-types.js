@@ -1,1 +1,1 @@
-export const FILTER_CONTACTS = 'users/filter';
+export const FILTER_CONTACTS = 'filter/filter';

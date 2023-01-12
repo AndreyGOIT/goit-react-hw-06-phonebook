@@ -1,31 +1,36 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { getContacts } from 'redux/contacts/contacts-selectors';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getContacts } from 'redux/contacts/contacts-selectors';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contacts/contactsSlice';
 
 import styles from './Form.module.css';
 import { nanoid } from 'nanoid';
+import { useState } from 'react';
 // import { within } from '@testing-library/react';
 
 const nameInputId = nanoid(); //=> "V1StGXR8_Z5jdHi6B-myT"
 const numberInputId = nanoid();
 
 export default function Form() {
-  const contacts = useSelector(getContacts);
-  console.log(contacts);
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
   const dispatch = useDispatch();
 
   const handleNameChange = event => {
-    name: event.target.value;
+    setName(event.target.value);
   };
   const handleNumberChange = event => {
-    number: event.target.value;
+    setNumber(event.target.value);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     console.log(name, number);
-    dispatch.addContact({ name, number });
-    // setName('');
-    // setNumber('');
+    const id = nanoid();
+    dispatch(addContact({ name, number, id }));
+    setName('');
+    setNumber('');
   };
 
   return (
