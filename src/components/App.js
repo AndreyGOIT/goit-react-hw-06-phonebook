@@ -56,17 +56,7 @@ export default function App() {
         Contacts
       </h2>
       <Filter value={filter} onChange={changeFilter} />
-      {/* {contactsQuantity > 0 ? ( */}
       <ContactsList contacts={visibleContacts} deleteContact={deleteContact} />
-      {/* ) : (
-        <span
-          style={{
-            margin: 15,
-          }}
-        >
-          There is no contacts yet
-        </span>
-      )} */}
     </>
   );
 }

@@ -3,16 +3,21 @@ import styles from './ContactsList.module.css';
 import PropTypes from 'prop-types';
 import { getContacts } from 'redux/contacts/contacts-selectors';
 import { deleteContact } from 'redux/contacts/contactsSlice';
+import { getFilter } from 'redux/filter/filter-selectors';
 
 export const ContactsList = () => {
   const contacts = useSelector(getContacts);
-  console.log(contacts);
+  // console.log(contacts);
+  const filter = useSelector(getFilter);
+  const visibleContacts = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter.toLowerCase())
+  );
   const dispatch = useDispatch();
 
   return (
     <section className={styles.section}>
       <ul>
-        {contacts.map(({ id, name, number }) => {
+        {visibleContacts.map(({ id, name, number }) => {
           return (
             <li key={id}>
               {name}: {number}
