@@ -37,9 +37,6 @@ export default function App() {
     setContacts(contacts.filter(({ id }) => id !== deleteId));
   };
 
-  const contactsQuantity = contacts.length;
-  console.log(contactsQuantity);
-  // const { filter } = this.state;
   const visibleContacts = updateContacts();
   return (
     <>
@@ -59,12 +56,9 @@ export default function App() {
         Contacts
       </h2>
       <Filter value={filter} onChange={changeFilter} />
-      {contactsQuantity > 0 ? (
-        <ContactsList
-          contacts={visibleContacts}
-          deleteContact={deleteContact}
-        />
-      ) : (
+      {/* {contactsQuantity > 0 ? ( */}
+      <ContactsList contacts={visibleContacts} deleteContact={deleteContact} />
+      {/* ) : (
         <span
           style={{
             margin: 15,
@@ -72,7 +66,7 @@ export default function App() {
         >
           There is no contacts yet
         </span>
-      )}
+      )} */}
     </>
   );
 }
