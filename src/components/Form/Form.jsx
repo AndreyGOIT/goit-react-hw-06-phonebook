@@ -27,8 +27,8 @@ export default function Form() {
   const handleSubmit = event => {
     event.preventDefault();
     console.log(name, number);
-    const id = nanoid();
-    dispatch(addContact({ name, number, id }));
+
+    dispatch(addContact({ name, number, id: nanoid() }));
     setName('');
     setNumber('');
   };
